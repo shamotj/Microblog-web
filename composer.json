@@ -1,0 +1,14 @@
+{
+    "require": {
+        "silex/silex": "~1.1",
+        "twig/twig": ">=1.8,<2.0-dev",
+        "michelf/php-markdown": ">=1.4",
+        "dg/texy": ">=2.4"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "Neonus\\Microblog\\": "vendor/neonus/microblog"
+        }
+    }
+}
