@@ -9,8 +9,6 @@
 
         <link rel="stylesheet" href="/css/normalize.min.css">
         <link rel="stylesheet" href="/css/main.css">
-
-        <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
 
@@ -24,14 +22,16 @@
             </nav>
         </header>
 
+	{% block content %}
         <h1>Zoznam článkov</h1>
         {% for post in posts %}
         <article>
-            <h2><a href="/blog/{{ post.url }}">{{ post.title }}</a></h2>
+            <h2><a href="/blog/{{ post.url }}"><span class="date">{{ post.date }}</span> {{ post.title }}</a></h2>
             <section>{{ post.excerpt }}</section>
             <a href="/blog/{{ post.url }}">čítaj</a>
         </article>
         {% endfor %}
+	{% endblock %}
 
         <footer>
             Copyright &copy; {{ "now"|date('Y') }} shamot
