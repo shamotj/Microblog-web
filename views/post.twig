@@ -1,6 +1,10 @@
 {% extends "index.twig" %}
 {% block content %}
+<article>
+<h1>{{ post.title }}</h1>
+<p class="date">{{ post.date|date('d.m.Y') }}</p>
 {% autoescape false %}
 {{ post.content }}
 {% endautoescape %}
+</article>
 {% endblock %}
