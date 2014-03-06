@@ -1,0 +1,26 @@
+<p>Predstavte si situáciu, napríklad dovolenku alebo výlet, kedy sú prítomné minimálne dva fotoaparáty. Jeden je váš a ďalší napríklad vášho brata. Samozrejme každí odfotil iné zábery a vy chcete mať v adresári vo vašom počítači vaše fotky a zároveň aj bratove. Nastala však situácia, že fotky sú zoradené podľa názvu, a teda počas prehliadania pravdepodobne prejdete najprv všetky vaše fotky a potom až bratove (resp. naopak). Pre tento účel by bolo vhodné pomenovať všetky fotky (vaše aj bratove) podľa toho v akom čase boli odfotené.</p>
+<p>Pokiaľ ste použili digitálny fotoaparát, je veľmi pravdepodobné že každá fotka obsahuje aj <strong>EXIF</strong> informácie. Súčasťou EXIF informácií je aj čas vytvorenia fotky. Takže pokiaľ máte vo vašom digitálnom fotoaparáte nastavený správny čas, je možné fotky zoradiť automaticky, bez nutnosti premonovávať každú jednu fotku individuálne po pamäti.</p>
+
+<p>Presne tento prípad sa stal aj mne a preto som napísal krátky skript ktorý vykoná danú úlohu. Skript je napísaný v <strong>BASH</strong>i, čiže pre jeho spustenie budete potrebovať nejakú NIX-ové prostredie (UNIX, LINUX, ...). Taktiež budete potrebovať program <strong>exif</strong>, ostatné použité programy by mali byť štandardnou súčasťou distribúcie.</p>
+<p>Samotný skript je tu:</p>
+<pre>
+for i in $@
+do 
+        time=`exif -t 0x132 $i | grep Value: | awk '{print $2"\t"$3}'`
+        echo -e "$i\t$time" >> /tmp/sort
+done
+cat /tmp/sort | sort -k 2,3 | nl -n rz -s ".jpg " | awk -F' ' '{print $2,$1,
+$3,$4}' > /tmp/sorted
+rm /tmp/sort
+cat /tmp/sorted | cut -d' ' -f1,2 | sed -e 's/^/mv /g' | sh
+
+exit 0
+</pre>
+<p>Skript si môžete taktiež stiahnúť z tejto adresy: <a href="http://toocube.neonus.sk/sort.sh">http://toocube.neonus.sk/sort.sh</a></p>
+<p>Skript nevyžaduje žiadne parametre okrem zoznamu fotiek. Čiže:
+<pre>
+$ ./sort.sh *.jpg
+
+</pre>
+spustí skript a vygeneruje potrebné názvy pre všetky súbory v aktuálnom adresári s príponou <strong>jpg</strong>. Skript načíta postupne všetky názvy a údaje o čase vytvorenia a následne vygeneruje nové názvy pre fotky a premenuje ich.</p>
+
