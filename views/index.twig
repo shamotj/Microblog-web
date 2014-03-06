@@ -9,6 +9,7 @@
 
         <link rel="stylesheet" href="/css/normalize.min.css">
         <link rel="stylesheet" href="/css/main.css">
+	<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic|Noto+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
     </head>
     <body>
 
@@ -23,14 +24,16 @@
         </header>
 
 	{% block content %}
+	<content>
         <h1>Zoznam článkov</h1>
         {% for post in posts %}
         <article>
-            <h2><a href="/blog/{{ post.url }}"><span class="date">{{ post.date }}</span> {{ post.title }}</a></h2>
+            <h2><a href="/blog/{{ post.url }}"><span class="date">{{ post.date|date('d.m.Y') }}</span> {{ post.title }}</a></h2>
             <section>{{ post.excerpt }}</section>
             <a href="/blog/{{ post.url }}">čítaj</a>
         </article>
         {% endfor %}
+	</content>
 	{% endblock %}
 
         <footer>

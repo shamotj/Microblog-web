@@ -15,7 +15,7 @@ $blog = new Microblog(__DIR__ . '/../data/');
 
 $app->get('/', function() use ($app, $blog) {
     return $app['twig']->render('index.twig', array(
-        'posts' => $blog->getPosts(),
+        'posts' => $blog->getPosts(true),
     ));
 });
 
