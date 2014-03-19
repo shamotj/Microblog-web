@@ -25,8 +25,7 @@ img {
 }
 
 body {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: 300;
+    font-family: "DejaVu sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     line-height: 1.6;
     font-size: 20px;
     margin: 0 1em;
@@ -46,4 +45,11 @@ h3, h3 a {
 }
 a:link {
     text-decoration: none;
+}
+
+@media screen and (max-width: 30rem) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.6rem; }
+
 }
